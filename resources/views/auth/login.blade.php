@@ -10,18 +10,25 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
+    
     <h2>Login :</h2>
     <form action="{{route('check.login')}}" method="POST">
       @csrf
       <div class="form-group">
-        <label >Email address:</label>
-        <input type="email" class="form-control" placeholder="Enter email" id="email" name="email" required="email">
+        <label ><b>Email address:</b></label>
+        <input type="text" class="form-control" placeholder="Enter Email" name="email" >
+        @if($errors->has('email'))
+        <div class="alert alert-danger">{{ $errors->first('email') }}</div>
+    @endif
       </div>
       <div class="form-group">
-        <label >Password:</label>
-        <input type="password" class="form-control" placeholder="Enter password" id="password" name="password" required="email">
+        <label ><b>Password:</b></label>
+        <input type="password" class="form-control" placeholder="Enter Password" name="password" >
+        @if($errors->has('password'))
+        <div class="alert alert-danger">{{ $errors->first('password') }}</div>
+    @endif
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-primary"><b>Submit</b></button>
     </form>
     
     <!-- Optional JavaScript -->
