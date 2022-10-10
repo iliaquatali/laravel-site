@@ -26,8 +26,8 @@ class LoginController extends Controller
             return redirect()->Route('show')->with('success', 'You have successfully Logged In.');
         }
     else
-    {
-      return view('auth.login');
+    {   
+      return view('auth.log');
     }
 }
 }

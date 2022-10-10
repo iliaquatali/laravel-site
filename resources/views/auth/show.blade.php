@@ -20,7 +20,7 @@
     <table class="table table-bordered" action="{{route('show')}}">
     <thead>
         <tr>
-            <th>S.No</th>
+            <th>ID</th>
             <th>Name</th>
             <th>Email</th>
     
