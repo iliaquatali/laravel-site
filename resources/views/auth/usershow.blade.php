@@ -11,27 +11,16 @@
   </head>
   <body>
     
-    <h1>Admin Basdboard</h1>
-   <div class="row-lg-10">
-    
+    <h1>Admin Dasdboard</h1>
     <a href="register"><button type="submit" class="btn btn-success">Add User</button></a>
-    <a href={{route('teacher.list')}}><button type="submit" class="btn btn-primary">Teachers</button></a>
-    <a href={{route('student.list')}}><button type="submit" class="btn btn-success">Students</button></a>
-    <a href="login"><button type="submit" class="btn btn-danger">Logout</button></a>
-   </div><br>
 
-   <form method="GET" class="col-lg-10">
-    <div class="form-group ">
-      <input type="" name="search" value="" class="form-control" placeholder="Search by name and email" >
-      <button class="btn btn-success" type="submit" id="button" name="button">Search</button>
-    </div>
-</form>
+    
     @if ($message = Session::get('success'))
     <div class="alert alert-success">
         <p>{{ $message }}</p>
     </div>
     @endif
-    </form>
+  
     <table class="table table-bordered" action="{{route('show')}}">
     <thead>
         <tr>
@@ -52,11 +41,8 @@
 
             </tr>
             @endforeach
-
     </tbody>
     </table>
-    {{-- {!! $user->withQueryString()->links('pagination::bootstrap-5') !!} --}}
-
     </div>
     
     <!-- Optional JavaScript -->

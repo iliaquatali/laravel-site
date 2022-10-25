@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>Login in Laravel</title>
+    <title>Login</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -10,27 +10,32 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
   <body>
-    
-    <h2>Login :</h2>
-    <form action="{{route('check.login')}}" method="POST">
+    <form action={{route('check.login') }} method="POST">
       @csrf
+  <div class="container">
+      <h1 class="text-center">Login</h1>
       <div class="form-group">
-        <label ><b>Email address:</b></label>
-        <input type="text" class="form-control" placeholder="Enter Email" name="email" >
-        @if($errors->has('email'))
-        <div class="alert alert-danger">{{ $errors->first('email') }}</div>
-    @endif
-      </div>
-      <div class="form-group">
-        <label ><b>Password:</b></label>
-        <input type="password" class="form-control" placeholder="Enter Password" name="password" >
-        @if($errors->has('password'))
-        <div class="alert alert-danger">{{ $errors->first('password') }}</div>
-    @endif
-      </div>
-      <button type="submit" class="btn btn-primary"><b>Submit</b></button>
-    </form>
-    
+          <label for=""><b>Email</b></label>
+          <input type="text" name="email" id="email" class="form-control" placeholder="Enter Email" value="{{old('email')}}">
+          <span class="text-danger">
+              @error('email')
+                  {{$message}}
+              @enderror
+          </span>
+        </div> 
+        <div class="form-group">
+          <label for=""><b>Password</b></label>
+          <input type="password" name="password" id="" class="form-control" placeholder="Enter Password">
+          <span class="text-danger">
+              @error('password')
+                  {{$message}}
+              @enderror
+          </span>
+        </div> 
+         
+        <button class="btn btn-primary">Submit</button>
+  </div>
+</form>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

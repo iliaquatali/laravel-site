@@ -20,14 +20,23 @@ class LoginController extends Controller
 
             'email' => 'required|email|unique:users',
             'password' => 'required',
-
         ]);
-        if($request->email == 'liaquat@gmail.com' && $request->password == '111'){
+        if($request->email == 'admin@demo.com' && $request->password == '111'){
+            session([
+                'admin' => 1,
+            ]);
             return redirect()->Route('show')->with('success', 'You have successfully Logged In.');
+        }
+        elseif($request->email == 'user@demo.com' && $request->password == '111'){
+            session([
+                'user' => 1,
+            ]);
+            return redirect()->Route('posts.index')->with('success', 'You have successfully Logged In.');
         }
     else
     {   
-      return view('auth.log');
+      return redirect()->Route('login');
     }
 }
+
 }

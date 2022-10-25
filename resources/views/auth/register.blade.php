@@ -10,18 +10,6 @@
 </head>
 <body>
 
-    @if ($message = Session::get('success'))
-<div class="alert alert-success alert-block">
-	<button type="button" class="close" data-dismiss="alert">×</button>	
-        <strong>{{ $message }}</strong>
-</div>
-@endif
-@if ($message = Session::get('error'))
-<div class="alert alert-danger alert-block">
-	<button type="button" class="close" data-dismiss="alert">×</button>	
-        <strong>{{ $message }}</strong>
-</div>
-@endif
 <div class="container">
   <h2>User Registration</h2>
   <form action="{{route('user.store')}}" method="POST">
@@ -40,6 +28,15 @@
       <label class="text-danger">{{$message}}</label>
       @enderror
     </div>
+    
+    <div class="form-group">
+      <label for="">Select Type</label>
+      <select class="form-control" name="type" id="">
+        <option value="students">Students</option>
+        <option value="teachers">Teachers</option>
+      </select>
+    </div>
+    
     <div class="form-group">
       <label><b>Password:</b></label>
       <input type="password" class="form-control" placeholder="Enter password" name="password">

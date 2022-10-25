@@ -13,10 +13,10 @@ class RegisterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::paginate(10);
-        return view('auth.show',['users'=>$users]);
+        // $users = User::paginate(10);
+        return view('auth.show');
 
     }
 
@@ -43,12 +43,15 @@ class RegisterController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required',
+            'type' => 'required',
+
 
         ]);
 
         $user = new User();
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->type = $request->type;
         $user->password = $request->password;
         if($user->save())
         {
@@ -56,7 +59,6 @@ class RegisterController extends Controller
         }
         else
         {
-            
             return redirect()->route('user.create')->with('error', 'Not Registered.');
         }
         
@@ -74,6 +76,7 @@ class RegisterController extends Controller
              return view('auth.show',compact('user'));
 
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -104,9 +107,10 @@ class RegisterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->delete();
+        return redirect()->route('auth.register')->with('User record deleted seccessfully');
     }
 
 }

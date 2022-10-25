@@ -2,8 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\auth\LoginController;
-use App\Http\Controllers\auth\DashboardController;
+
 use App\Http\Controllers\auth\RegisterController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\DataViewController;
+
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,14 +25,27 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('index',[LoginController::class,'show'])->name('index');
 
 Route::get('login',[LoginController::class,'show'])->name('login');
 Route::post('login',[LoginController::class,'checklogin'])->name('check.login');
-Route::get('dashboard',[DashboardController::class,'dash'])->name('dashboard');
+
+Route::middleware(['is_admin'])->group(function(){
+    Route::get('show', [RegisterController::class,'show'])->name('show');
+    Route::get('register', [RegisterController::class,'create'])->name('user.create');
+    Route::get('logout', [RegisterController::class,'logout'])->name('logout');
 
 
+});
 
-Route::get('register', [RegisterController::class,'create'])->name('user.create');
+Route::middleware(['is_user'])->group(function(){
+Route::resource('/posts', PostController::class);
+
+});
+
+
 Route::post('user/store', [RegisterController::class,'store'])->name('user.store'); 
-Route::get('show', [RegisterController::class,'show'])->name('show');
+
+Route::get('teacherlist', [DataViewController::class,'teacherList'])->name('teacher.list'); 
+Route::get('studentlist', [DataViewController::class,'studentList'])->name('student.list'); 
+
+
