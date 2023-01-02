@@ -29,19 +29,17 @@ Route::get('/', function () {
 Route::get('login',[LoginController::class,'show'])->name('login');
 Route::post('login',[LoginController::class,'checklogin'])->name('check.login');
 
+//Admin middleware
 Route::middleware(['is_admin'])->group(function(){
     Route::get('show', [RegisterController::class,'show'])->name('show');
     Route::get('register', [RegisterController::class,'create'])->name('user.create');
     Route::get('logout', [RegisterController::class,'logout'])->name('logout');
-
-
 });
-
+//User middleeare
 Route::middleware(['is_user'])->group(function(){
 Route::resource('/posts', PostController::class);
 
 });
-
 
 Route::post('user/store', [RegisterController::class,'store'])->name('user.store'); 
 
